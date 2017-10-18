@@ -1,0 +1,173 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NearFieldViewer"
+        xmlns:ViewModels="clr-namespace:NearFieldViewer.ViewModels" x:Class="NearFieldViewer.MainWindow"
+        mc:Ignorable="d"
+        Title="Near field viewer" MinHeight="480" MinWidth="640">
+    <Window.DataContext>
+        <ViewModels:FieldViewModel></ViewModels:FieldViewModel>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding LoadFieldCommand}" />
+    </Window.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="280"/>
+            <!--<ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>-->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding LoadFieldCommand}" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="Save" Command="ApplicationCommands.Save"/>
+                <MenuItem Header="Save as" Command="ApplicationCommands.SaveAs"/>
+                <MenuItem Header="Exit" Click="MenuItem_Exit_Click" />
+            </MenuItem>
+            <MenuItem Header="View">
+
+            </MenuItem>
+            <MenuItem Header="About" />
+        </Menu>
+        <Viewbox Margin="10,10,10,10" Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Image x:Name="image" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding Image, Mode=OneWay}" MouseDown="canvas_MouseDown" MouseMove="canvas_MouseMove" />
+                <Canvas x:Name="canvas"></Canvas>
+            </Grid>
+        </Viewbox>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_Name" Text="Name" Grid.Column="0" />
+                <TextBox  x:Name="textBox_Name" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Name, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Line StrokeThickness="1" Stretch="Fill" X2="10" Stroke="#FFB9B9B9" Margin="0, 5, 0, 5" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_MinX" Text="Min X" Grid.Column="0" />
+                <TextBox  x:Name="textBox_MinX" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=MinX, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_MaxX" Text="Max X" Grid.Column="0" />
+                <TextBox x:Name="textBox_MaxX" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=MaxX, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_StepX" Text="Step X" Grid.Column="0" />
+                <TextBox  x:Name="textBox_StepX" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=StepX, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_MinY" Text="Min Y" Grid.Column="0" />
+                <TextBox  x:Name="textBox_MinY" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=MinY, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_MaxY" Text="Max Y" Grid.Column="0" />
+                <TextBox  x:Name="textBox_MaxY" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=MaxY, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_StepY" Text="Step Y" Grid.Column="0" />
+                <TextBox  x:Name="textBox_StepY" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=StepY, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_NodesX" Text="Nodes X" Grid.Column="0" />
+                <TextBox  x:Name="textBox_NodesX" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=NodesX, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_NodesY" Text="Nodes Y" Grid.Column="0" />
+                <TextBox  x:Name="textBox_NodesY" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=NodesY, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_Wavelength" Text="Wavelength" Grid.Column="0" />
+                <TextBox  x:Name="textBox_Wavelength" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Wavelength, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_Energy" Text="Energy" Grid.Column="0" />
+                <TextBox  x:Name="textBox_Energy" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Energy, Mode=OneWay}" Grid.Column="1" IsReadOnly="True" />
+            </Grid>
+            <Line StrokeThickness="1" Stretch="Fill" X2="10" Stroke="#FFB9B9B9" Margin="0, 5, 0, 5"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_scale" Text="Scale" Grid.Column="0" />
+                <ComboBox Grid.Column="1" ItemsSource="{Binding Scales, Mode=OneWay}" SelectedItem="{Binding SelectedScale}"></ComboBox>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_displayRangeMin" Text="Range (min)" Grid.Column="0" />
+                <TextBox  x:Name="textBox_displayRangeMin" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding DisplayRangeMin, Mode=TwoWay}" Grid.Column="1" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="label_displayRangeMax" Text="Range (max)" Grid.Column="0" />
+                <TextBox  x:Name="textBox_displayRangeMax" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding DisplayRangeMax, Mode=TwoWay}" Grid.Column="1" />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5, 0, 5">
+                <Button Command="{Binding RedrawCommand}" Margin="0, 0, 2.5, 0">Update</Button>
+                <Button Command="{Binding ResetImageCommand}" Margin="3, 0, 2.5, 0">Reset</Button>
+            </StackPanel>
+        </StackPanel>
+        <StatusBar x:Name="statusBar" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <TextBlock x:Name="statusBar_text"><Run Text="Status"/></TextBlock>
+        </StatusBar>
+        <!--<Canvas Grid.Column="1" HorizontalAlignment="Left" Height="299" Margin="460,215,-500,-28" Grid.Row="1" VerticalAlignment="Top" Width="320" Grid.RowSpan="2">
+            <Image Height="225" Width="265"/>
+        </Canvas>-->
+    </Grid>
+</Window>
